@@ -7,7 +7,7 @@
     "noImplicitAny": true,
     "module": "ESNext",
     "target": "es5",
-    "jsx": "react",
+    "jsx": "preserve",    // use 'preserve' for pass jsx to babel-loader
     "allowSyntheticDefaultImports": true,
     "paths": {
       "@/*": [

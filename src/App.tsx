@@ -1,13 +1,13 @@
 import { hot } from 'react-hot-loader/root'
-import React from 'react'
-import Page from '@/components/Page'
+import React, { ReactElement } from 'react'
+import { BrowserRouter as Router } from 'react-router-dom'
+import Routes from './routes'
 
-const App = () => {
+const App = (): ReactElement => {
   return (
-    <Page title="easyapp-template-react demo">
-      <h1>Easyapp-template-react demo</h1>
-      <p>This is a project with react and typescript, created by easyapp.</p>
-    </Page>
+    <Router>
+      <Routes />
+    </Router>
   )
 }
 

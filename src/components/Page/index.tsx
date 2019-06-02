@@ -1,7 +1,7 @@
 import React, { FunctionComponent, ReactNode } from 'react'
 import useTitle from '@/hooks/useTitle'
 
-interface PageProps  {
+interface PageProps {
   children: ReactNode
   title: string
 }
@@ -9,11 +9,7 @@ interface PageProps  {
 const Page: FunctionComponent<PageProps> = ({ children, title }) => {
   useTitle(title)
 
-  return (
-    <div className="page">
-      {children}
-    </div>
-  )
+  return <div className="page">{children}</div>
 }
 
 export default Page

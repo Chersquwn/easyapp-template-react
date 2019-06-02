@@ -15,7 +15,7 @@ const DEV_ENV = process.env.NODE_ENV === 'development'
 const PROD_ENV = process.env.NODE_ENV === 'production'
 
 let webpackConfig = {
-  entry: './src/index.tsx',
+  entry: './index.tsx',
 
   output: {
     filename: DEV_ENV ? '[name].js' : 'js/[name].[contenthash:5].js',
@@ -52,8 +52,9 @@ let webpackConfig = {
           {
             loader: 'css-loader',
             options: {
-              modules: false,
-              localIdentName: '[path][name]__[local]--[hash:base64:5]'
+              modules: true,
+              importLoaders: 1,
+              localIdentName: '[local]--[hash:base64:5]'
             }
           },
           {
@@ -83,14 +84,14 @@ let webpackConfig = {
     symlinks: false
   },
 
-  context: path.resolve(__dirname, '..'),
+  context: path.resolve(__dirname, '../src'),
 
   stats: 'errors-only',
 
   plugins: [
     new HtmlWebpackPlugin({
       filename: 'index.html',
-      template: 'src/index.html'
+      template: 'index.html'
     }),
     new DefinePlugin({
       'process.env.NODE_ENV': JSON.stringify(process.env.NODE_ENV)
@@ -142,11 +143,14 @@ if (PROD_ENV) {
     ],
 
     optimization: {
-      minimizer: [new TerserJSPlugin({}), new OptimizeCSSAssetsPlugin({
-        cssProcessPluginOptions: {
-          preset: ['default', { discardComments: { removeAll: true } }]
-        }
-      })],
+      minimizer: [
+        new TerserJSPlugin({}),
+        new OptimizeCSSAssetsPlugin({
+          cssProcessPluginOptions: {
+            preset: ['default', { discardComments: { removeAll: true } }]
+          }
+        })
+      ],
       runtimeChunk: 'single',
       splitChunks: {
         cacheGroups: {
